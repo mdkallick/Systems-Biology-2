@@ -1,0 +1,21 @@
+runtime, python, ode15s (s): 0.8550889492034912
+
+Matlab times (s):
+ode23time =
+
+    0.3463
+
+
+ode45time =
+
+    0.2944
+
+
+ode23stime =
+
+    0.8698
+
+
+ode15stime =
+
+    0.7029
