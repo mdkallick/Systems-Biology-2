@@ -152,6 +152,8 @@ def generate_parent(cost_func, lb, ub):
     for i in range(1000):
         params = np.add(lb, np.multiply(np.random.rand(len(lb)),
                                                 np.subtract(ub,lb)))
+        # for the FourFit model ONLY:
+        
         cost = cost_func(params)
         if(math.isfinite(cost)):
             return params, cost
