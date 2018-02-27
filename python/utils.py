@@ -18,19 +18,19 @@ def get_amps(y):
     return (np.amax(y,axis=0) - np.amin(y,axis=0))
 
 def calc_FourFit( t0, dt, tf, params ):
-	num_cos = params[0]
-	C = params[1]
-	tau = params[2]
-	A = []
+    num_cos = params[0]
+    C = params[1]
+    tau = params[2]
+    A = []
     phi = []
     for i in range(num_cos):
         A.append(params[3+i])
-	    phi.append(params[3+num_cos+i])
+        phi.append(params[3+num_cos+i])
 
-	t = np.arange(t0, tf, dt)
+        t = np.arange(t0, tf, dt)
 	x = np.zeros_like(t)
     for i in range(num_cos):
-    	tmp_angles = np.divide(np.multiply(2*math.pi, np.difference(phi[i], t)), (tau/i))
+    	tmp_angles = np.divide(np.multiply(2*math.pi, np.subtract(phi[i], t)), (tau/i))
     	tmp_x = np.multiply(A[i], np.cos(tmp_angles))
     	x = np.add(x, tmp_x)
     x = np.add(C, x)

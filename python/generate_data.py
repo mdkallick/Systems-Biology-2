@@ -14,10 +14,11 @@ def generate_multiple_cos(N, C, tau, amps, phis, t0, dt, tf):
     x = np.zeros_like(t)
 
     for i in range(N):
-        tmp_angles = np.divide(np.multiply(2*math.pi, np.difference(phis[i], t)), (tau/i))
+        tmp_angles = np.divide(np.multiply(2*math.pi, np.subtract(phis[i], t)), (tau/(i+1)))
         tmp_x = np.multiply(amps[i], np.cos(tmp_angles))
         x = np.add(x, tmp_x)
     x = np.add(C, x)
+    return x, t
 
 def write_to_csv(x, t, filename):
     f = open(filename, 'w')
@@ -25,7 +26,12 @@ def write_to_csv(x, t, filename):
         f.write(str(t[i]) + "," + str(x[i]) + "\n")
 
 if __name__ == '__main__':
-    x, t = generate_cos(10, 24, 0, .1, 120)
+    N = 3
+    C = 2
+    tau = 24
+    amps = [10, 5, 4]
+    phis = [24, 20, 2]
+    x, t = generate_multiple_cos(N, C, tau, amps, phis, 0, .1, 120)
     plt.plot( t, x )
     plt.show()
-    write_to_csv(x, t, "cos.csv")
+    write_to_csv(x, t, "mult_cos.csv")

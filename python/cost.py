@@ -32,7 +32,7 @@ def multiple_cos_cost( params ):
 
     x, t = calc_FourFit( t0, dt, tf, params )
 
-    true_data = np.genfromtxt("cos.csv", delimiter=",");
+    true_data = np.genfromtxt("mult_cos.csv", delimiter=",");
     true_t = true_data[:,0]
     true_x = true_data[:,1]
 
