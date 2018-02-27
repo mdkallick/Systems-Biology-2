@@ -8,6 +8,17 @@ def generate_cos(amp, per, t0, dt, tf):
     x = np.multiply(np.cos(angles), amp)
     return x, t
 
+def generate_multiple_cos(N, C, tau, amps, phis, t0, dt, tf):
+    t = np.arange(t0, tf, dt)
+
+    x = np.zeros_like(t)
+
+    for i in range(N):
+        tmp_angles = np.divide(np.multiply(2*math.pi, np.difference(phis[i], t)), (tau/i))
+        tmp_x = np.multiply(amps[i], np.cos(tmp_angles))
+        x = np.add(x, tmp_x)
+    x = np.add(C, x)
+
 def write_to_csv(x, t, filename):
     f = open(filename, 'w')
     for i in range(len(x)):

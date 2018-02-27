@@ -21,22 +21,22 @@ def calc_FourFit( t0, dt, tf, params ):
 	num_cos = params[0]
 	C = params[1]
 	tau = params[2]
-	A = params[3]
-	phi = params[4]
-	
+	A = []
+    phi = []
+    for i in range(num_cos):
+        A.append(params[3+i])
+	    phi.append(params[3+num_cos+i])
+
 	t = np.arange(t0, tf, dt)
 	x = np.zeros_like(t)
-    angles = []
     for i in range(num_cos):
     	tmp_angles = np.divide(np.multiply(2*math.pi, np.difference(phi[i], t)), (tau/i))
-    	angles.append(tmp_angles)
-    for i in range(num_cos):
-    	tmp_x = np.multiply(A[i], np.cos(angles[i]))
+    	tmp_x = np.multiply(A[i], np.cos(tmp_angles))
     	x = np.add(x, tmp_x)
     x = np.add(C, x)
-    
+
     return x, t
-    
+
 ### TAKEN FROM: https://stackoverflow.com/a/15860757
 # update_progress() : Displays or updates a console progress bar
 ## Accepts a float between 0 and 1. Any int will be converted to a float.

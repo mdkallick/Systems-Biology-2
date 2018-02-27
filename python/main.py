@@ -17,7 +17,7 @@ num_children = 50
 num_generations = 9
 mutation = .1
 
-P, Pcost = GA(simple_cos_cost, selection_func, lb, ub, num_parents,
+P, Pcost = GA(multiple_cos_cost, selection_func, lb, ub, num_parents,
                 num_children, num_generations, mutation, tourney_size=20)
 best_ind = np.argmin(Pcost)
 best_P = P[best_ind]
