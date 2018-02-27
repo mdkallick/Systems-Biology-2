@@ -9,8 +9,9 @@ from cost import simple_cos_cost
 simple cos
 """
 selection_func="tournament_select"
-lb = [0,0]
-ub = [100, 100]
+num_cos = 1
+lb = [0] * (
+ub = [100]
 num_parents = 50
 num_children = 50
 num_generations = 9

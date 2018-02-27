@@ -1,5 +1,6 @@
 import numpy as np
 import time
+import math
 import sys
 
 # takes numpy arrays
@@ -16,6 +17,26 @@ def get_amp_old(x,y):
 def get_amps(y):
     return (np.amax(y,axis=0) - np.amin(y,axis=0))
 
+def calc_FourFit( t0, dt, tf, params ):
+	num_cos = params[0]
+	C = params[1]
+	tau = params[2]
+	A = params[3]
+	phi = params[4]
+	
+	t = np.arange(t0, tf, dt)
+	x = np.zeros_like(t)
+    angles = []
+    for i in range(num_cos):
+    	tmp_angles = np.divide(np.multiply(2*math.pi, np.difference(phi[i], t)), (tau/i))
+    	angles.append(tmp_angles)
+    for i in range(num_cos):
+    	tmp_x = np.multiply(A[i], np.cos(angles[i]))
+    	x = np.add(x, tmp_x)
+    x = np.add(C, x)
+    
+    return x, t
+    
 ### TAKEN FROM: https://stackoverflow.com/a/15860757
 # update_progress() : Displays or updates a console progress bar
 ## Accepts a float between 0 and 1. Any int will be converted to a float.
