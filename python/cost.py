@@ -26,11 +26,15 @@ def simple_cos_cost( params ):
     return cost
 
 def multiple_cos_cost( params ):
-    t0 = 0
-    dt = .1
-    tf = 120
+    true_data = np.genfromtxt("mult_cos.csv", delimiter=",");
+    true_t = true_data[:,0]
+    true_x = true_data[:,1]
+    
+#     t0 = 0
+#     dt = .1
+#     tf = (true_t.shape[0]+t0)*dt
 
-    x, t = calc_FourFit( t0, dt, tf, params )
+    x, t = calc_FourFit( true_t, params )
 
     true_data = np.genfromtxt("mult_cos.csv", delimiter=",");
     true_t = true_data[:,0]

@@ -18,7 +18,7 @@ def get_amp_old(x,y):
 def get_amps(y):
 	return (np.amax(y,axis=0) - np.amin(y,axis=0))
 
-def calc_FourFit( t0, dt, tf, params ):
+def calc_FourFit( t, params ):
 	try:
 		with warnings.catch_warnings(record=True) as w:
 			warnings.simplefilter("error", RuntimeWarning)
@@ -32,7 +32,7 @@ def calc_FourFit( t0, dt, tf, params ):
 				A.append(params[3+i])
 				phi.append(params[3+num_cos+i])
 
-				t = np.arange(t0, tf, dt)
+# 			t = np.arange(t0, tf, dt)
 			x = np.zeros_like(t)
 			for i in range(num_cos):
 				tmp_angles = np.divide(np.multiply(2*math.pi, np.subtract(phi[i], t)), (tau/(i+1)))
