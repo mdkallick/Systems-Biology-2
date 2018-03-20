@@ -62,10 +62,16 @@ tf = (true_t.shape[0]+t0)*dt
 # best_P = np.array([  5.    ,     946.62732358,  69.80521613, 171.24921375,  19.04053311,
 #  905.46152261, 230.99667462 ,930.91259142 ,513.27603457, 253.96031448,
 #  141.89190855, 971.58915881 ,317.85239937])
-    
-x,t = calc_FourFit( true_t, best_P )
 
+# x,t = calc_FourFit( true_t, best_P )
 
-plt.plot( t, x, 'b--' )
+# where t is x and x is y (confusing, I know) 
+coeffs = np.polyfit(true_t, true_x, 15)
+fit_x = np.polyval(coeffs, true_t)
+
+print(np.poly1d(coeffs))
+
+# plt.plot( t, x, 'b--' )
 plt.plot( true_t, true_x , 'r' )
+plt.plot( true_t, fit_x, 'b--')
 plt.show()
