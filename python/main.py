@@ -3,6 +3,8 @@ import math
 import copy
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy as sp
+import scipy.signal as sig
 from gen_al_utils import GA
 from cost import simple_cos_cost
 from cost import multiple_cos_cost
@@ -51,9 +53,9 @@ mutation = .1
 # print("best Pcost:")
 # print(best_Pcost)
 
-true_data = np.genfromtxt("mult_cos.csv", delimiter=",");
-true_t = true_data[:,0]
-true_x = true_data[:,1]
+true_data = np.genfromtxt("021717_12h_starvation_Ca1a_Bmal1.csv", delimiter=",", skip_header=3, missing_values=0);
+true_t = true_data[:,4]
+true_x = true_data[:,5]
 
 t0 = 0
 dt = .1
@@ -66,12 +68,22 @@ tf = (true_t.shape[0]+t0)*dt
 # x,t = calc_FourFit( true_t, best_P )
 
 # where t is x and x is y (confusing, I know) 
-coeffs = np.polyfit(true_t, true_x, 15)
+coeffs = np.polyfit(true_t, true_x, 3)
 fit_x = np.polyval(coeffs, true_t)
 
 print(np.poly1d(coeffs))
 
+inv_fit_x = np.max(fit_x) - fit_x
+
+fixed_x = np.add(inv_fit_x, true_x)
+avg_y = np.average(fixed_x)
+
+fixed_x = sig.savgol_filter(fixed_x, 51, 3)
+
 # plt.plot( t, x, 'b--' )
 plt.plot( true_t, true_x , 'r' )
+plt.plot( true_t, fixed_x , 'm' )
 plt.plot( true_t, fit_x, 'b--')
+plt.plot( true_t, inv_fit_x, '--')
+plt.axhline( avg_y )
 plt.show()
