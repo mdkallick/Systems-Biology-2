@@ -80,18 +80,45 @@ avg_y = np.average(fixed_x)
 
 fixed_x = sig.savgol_filter(fixed_x, 51, 3)
 
-# split into sections by passing the zero point
+dx = sig.savgol_filter(np.diff(fixed_x), 51, 3)
+shift_dx = dx[1:]
+# dddx = sig.savgol_filter(np.diff(dx,2), 51, 3)
 
-# find local maxima
+pv_idx = np.where(((dx[:-1] > 0) & (shift_dx < 0)) | ((dx[:-1] < 0) & (shift_dx > 0)))
 
-# use that to find period
+pv_times = true_t[pv_idx]
+pv_diff = np.diff(pv_times)
+avg_time = np.average(pv_diff)
+std_time = np.std(pv_diff)
+print(pv_idx)
+print(avg_time)
+print(std_time)
+print(pv_times)
+print(pv_diff)
 
-# also, can use that to find damping factor
+missing_idx = np.add(np.where(pv_diff > (avg_time + std_time)),1)
+
+tmp_list = pv_idx[0]
+
+for miss in missing_idx:
+	miss = miss[0]
+	print(miss)
+	print(tmp_list)
+	tmp_list = np.insert(tmp_list, miss, (pv_idx[0][miss-1]+pv_idx[0][miss])/2)
+	print(tmp_list)
+
+pv_idx = (np.array(tmp_list),)
+# print(pv_idx)
+
+cutoff=0
 
 # plt.plot( t, x, 'b--' )
-plt.plot( true_t, true_x , 'r' )
-plt.plot( true_t, fixed_x , 'm' )
-plt.plot( true_t, fit_x, 'b--')
-plt.plot( true_t, inv_fit_x, '--')
+plt.plot( true_t[cutoff:], true_x[cutoff:] , 'r' )
+plt.plot( true_t[cutoff:], fixed_x[cutoff:] , 'm' )
+# plt.plot( true_t, fit_x, 'b--')
+# plt.plot( true_t, inv_fit_x, '--')
+plt.plot( true_t[cutoff:-1], np.add(np.multiply(dx,50),avg_y)[cutoff:], 'g--' )
+plt.plot( true_t[pv_idx], true_x[pv_idx], 'bx' )
+plt.plot( true_t[pv_idx], fixed_x[pv_idx], 'rx' )
 plt.axhline( avg_y )
 plt.show()
