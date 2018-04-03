@@ -28,7 +28,7 @@ def run_multiple_cos(N, num_parents, num_children, num_generations, tourney_size
     best_Pcost = best_Pcosts[best_ind]
     return best_P, best_Pcost
 
-        
+
 """
 simple cos
 """
@@ -47,7 +47,7 @@ mutation = .1
 
 
 # best_P, best_Pcost = run_multiple_cos(5, num_parents, num_children, num_generations, tourney_size, mutation)
-# 
+#
 # print("best P:")
 # print(best_P)
 # print("best Pcost:")
@@ -67,7 +67,7 @@ tf = (true_t.shape[0]+t0)*dt
 
 # x,t = calc_FourFit( true_t, best_P )
 
-# where t is x and x is y (confusing, I know) 
+# where t is x and x is y (confusing, I know)
 coeffs = np.polyfit(true_t, true_x, 3)
 fit_x = np.polyval(coeffs, true_t)
 
@@ -79,6 +79,14 @@ fixed_x = np.add(inv_fit_x, true_x)
 avg_y = np.average(fixed_x)
 
 fixed_x = sig.savgol_filter(fixed_x, 51, 3)
+
+# split into sections by passing the zero point
+
+# find local maxima
+
+# use that to find period
+
+# also, can use that to find damping factor
 
 # plt.plot( t, x, 'b--' )
 plt.plot( true_t, true_x , 'r' )
