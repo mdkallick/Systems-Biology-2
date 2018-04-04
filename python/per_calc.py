@@ -86,7 +86,7 @@ def find_pv(filename="021717_12h_starvation_Ca1a_Bmal1.csv"):
 		plt.plot( true_t, fit_x, 'b--', label="polynomial fit (power 3)")
 		plt.plot( true_t, inv_fit_x, '--', label="inverted polynomial fit")
 		plt.axhline( avg_y )
-		plt.legend(loc="best")
+		plt.legend(loc="best",fontsize='xx-large')
 		plt.savefig(filename.rstrip(".csv")+str(i)+"_correct.png")
 		# plt.show()
 
@@ -100,7 +100,7 @@ def find_pv(filename="021717_12h_starvation_Ca1a_Bmal1.csv"):
 		# plt.plot( true_t[new_idx], true_x[new_idx], 'gx' )
 		plt.plot( true_t[new_idx], fixed_x[new_idx], 'gx', mew=2, markersize=8, label="predicted peaks and valleys" )
 		plt.axhline( avg_y )
-		plt.legend(loc="best")
+		plt.legend(loc="best",fontsize='xx-large')
 
 		# print(true_x.shape)
 		# window_len=11
