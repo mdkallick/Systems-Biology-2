@@ -35,3 +35,11 @@ def run_multiple_cos(N, num_parents, num_children, num_generations, tourney_size
 for filename in ["021717_12h_starvation_Ca1a_Bmal1.csv", "021717_12h_starvation_10A_Bmal1.csv"]:
 	find_pv(filename)
 	break
+# 
+# true_data = np.genfromtxt("021717_12h_starvation_Ca1a_Bmal1.csv", delimiter=",", skip_header=3, skip_footer=1, missing_values=0);
+# 
+# true_t = true_data[:,4]
+# true_x = true_data[:,5]
+# 
+# plt.plot( true_t, true_x, 'r')
+# plt.show()

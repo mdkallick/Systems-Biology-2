@@ -15,11 +15,20 @@ def find_pv(filename="021717_12h_starvation_Ca1a_Bmal1.csv"):
 	true_data = np.genfromtxt(filename, delimiter=",", skip_header=3, skip_footer=1, missing_values=0);
 
 	print(filename)
-	print(true_data.shape[1]/2)
+# 	print(true_data.shape[1]/2)
 
 	for i in range((int)(true_data.shape[1]/2)):
 		true_t = true_data[:,2*i]
 		true_x = true_data[:,(2*i)+1]
+		
+		cutoff = np.argmin(np.absolute(np.subtract(true_t, 1.0)))
+# 		print(true_t.shape)
+		true_t = true_t[cutoff:]
+		true_x = true_x[cutoff:]
+
+# 		print(true_t.shape)
+
+# 		print(cutof	f)
 
 		t0 = 0
 		dt = .1
@@ -65,14 +74,16 @@ def find_pv(filename="021717_12h_starvation_Ca1a_Bmal1.csv"):
 		tmp_list = []
 
 		for miss in missing_idx:
-			miss = miss[0]
-	# 		print(miss)
-	# 		print(tmp_list)
-			tmp_list.append((int)((pv_idx[0][miss-1]+pv_idx[0][miss])/2))
-	# 		print(tmp_list)
+# 			print(miss)
+			if(len(miss) > 0):
+				miss = miss[0]
+		# 		print(miss)
+		# 		print(tmp_list)
+				tmp_list.append((int)((pv_idx[0][miss-1]+pv_idx[0][miss])/2))
+		# 		print(tmp_list)
 
 		new_idx = (np.array(tmp_list),)
-		# print(pv_idx)
+# 		print(new_idx[0].shape[0])
 
 		cutoff=0
 
@@ -98,7 +109,8 @@ def find_pv(filename="021717_12h_starvation_Ca1a_Bmal1.csv"):
 		# plt.plot( true_t[pv_idx], true_x[pv_idx], 'bx' )
 		plt.plot( true_t[pv_idx], fixed_x[pv_idx], 'rx', mew=2, markersize=6, label="found peaks and valleys" )
 		# plt.plot( true_t[new_idx], true_x[new_idx], 'gx' )
-		plt.plot( true_t[new_idx], fixed_x[new_idx], 'gx', mew=2, markersize=8, label="predicted peaks and valleys" )
+		if(new_idx[0].shape[0]):
+			plt.plot( true_t[new_idx], fixed_x[new_idx], 'gx', mew=2, markersize=8, label="predicted peaks and valleys" )
 		plt.axhline( avg_y )
 		plt.legend(loc="best",fontsize='xx-large')
 
