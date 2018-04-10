@@ -11,11 +11,13 @@ from cost import simple_cos_cost
 from cost import multiple_cos_cost
 from utils import calc_FourFit
 
-def find_pv(filename="021717_12h_starvation_Ca1a_Bmal1.csv"):
+def find_pv(filename="021717_12h_starvation_Ca1a_Bmal1.csv", save_plot=True):
 	true_data = np.genfromtxt(filename, delimiter=",", skip_header=3, skip_footer=1, missing_values=0);
 
 	print(filename)
 # 	print(true_data.shape[1]/2)
+
+	max = (0,0)
 
 	for i in range((int)(true_data.shape[1]/2)):
 		true_t = true_data[:,2*i]
@@ -98,7 +100,8 @@ def find_pv(filename="021717_12h_starvation_Ca1a_Bmal1.csv"):
 		plt.plot( true_t, inv_fit_x, '--', label="inverted polynomial fit")
 		plt.axhline( avg_y )
 		plt.legend(loc="best",fontsize='xx-large')
-		plt.savefig(filename.rstrip(".csv")+str(i)+"_correct.png")
+		if(save_plot):
+			plt.savefig(filename.rstrip(".csv")+str(i)+"_correct.png")
 		# plt.show()
 
 		plt.close()
@@ -109,7 +112,7 @@ def find_pv(filename="021717_12h_starvation_Ca1a_Bmal1.csv"):
 		# plt.plot( true_t[pv_idx], true_x[pv_idx], 'bx' )
 		plt.plot( true_t[pv_idx], fixed_x[pv_idx], 'rx', mew=2, markersize=6, label="found peaks and valleys" )
 		# plt.plot( true_t[new_idx], true_x[new_idx], 'gx' )
-		if(new_idx[0].shape[0]):
+		if(new_idx[0].shape[0] != 0):
 			plt.plot( true_t[new_idx], fixed_x[new_idx], 'gx', mew=2, markersize=8, label="predicted peaks and valleys" )
 		plt.axhline( avg_y )
 		plt.legend(loc="best",fontsize='xx-large')
@@ -117,6 +120,12 @@ def find_pv(filename="021717_12h_starvation_Ca1a_Bmal1.csv"):
 		# print(true_x.shape)
 		# window_len=11
 		# plt.plot(true_t,smooth(true_x,window_len,"bartlett")[:-window_len+1])
-
-		plt.savefig(filename.rstrip(".csv")+str(i)+"_peaks.png")
+	
+		if(save_plot):
+			plt.savefig(filename.rstrip(".csv")+str(i)+"_peaks.png")
 # 		plt.show()
+
+		if(new_idx[0].shape[0] > max[0]):
+			max = (new_idx[0].shape[0], (2*i,(2*i)+1))
+	return max
+	

@@ -30,11 +30,13 @@ def run_multiple_cos(N, num_parents, num_children, num_generations, tourney_size
     best_Pcost = best_Pcosts[best_ind]
     return best_P, best_Pcost
 
-
+max = (0,0)
 
 for filename in ["021717_12h_starvation_Ca1a_Bmal1.csv", "021717_12h_starvation_10A_Bmal1.csv"]:
-	find_pv(filename)
-	break
+	tmpmax = find_pv("../data/"+filename, save_plot=False)
+	if(tmpmax[0] > max[0]):
+		max = (tmpmax[0], (tmpmax[1], filename))
+print(max)
 # 
 # true_data = np.genfromtxt("021717_12h_starvation_Ca1a_Bmal1.csv", delimiter=",", skip_header=3, skip_footer=1, missing_values=0);
 # 
