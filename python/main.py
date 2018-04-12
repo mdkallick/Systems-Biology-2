@@ -10,7 +10,8 @@ from gen_al_utils import GA
 from cost import simple_cos_cost
 from cost import multiple_cos_cost
 from utils import calc_FourFit
-from per_calc import find_pv
+from per_calc import find_pv_full
+from per_calc import find_pv_single
 
 def run_multiple_cos(N, num_parents, num_children, num_generations, tourney_size, mutation):
     best_Ps = []
@@ -30,13 +31,14 @@ def run_multiple_cos(N, num_parents, num_children, num_generations, tourney_size
     best_Pcost = best_Pcosts[best_ind]
     return best_P, best_Pcost
 
-max = (0,0)
-
-for filename in ["021717_12h_starvation_Ca1a_Bmal1.csv", "021717_12h_starvation_10A_Bmal1.csv"]:
-	tmpmax = find_pv("../data/"+filename, save_plot=False)
-	if(tmpmax[0] > max[0]):
-		max = (tmpmax[0], (tmpmax[1], filename))
-print(max)
+# max = (0,0)
+# 
+# for filename in ["021717_12h_starvation_Ca1a_Bmal1.csv", "021717_12h_starvation_10A_Bmal1.csv"]:
+# 	tmpmax = find_pv_full("../data/"+filename, save_plot=False)
+# 	print(tmpmax)
+# 	if(tmpmax[0] > max[0]):
+# 		max = (tmpmax[0], (tmpmax[1], filename))
+# print(max)
 # 
 # true_data = np.genfromtxt("021717_12h_starvation_Ca1a_Bmal1.csv", delimiter=",", skip_header=3, skip_footer=1, missing_values=0);
 # 
@@ -45,3 +47,39 @@ print(max)
 # 
 # plt.plot( true_t, true_x, 'r')
 # plt.show()
+
+filename = '021717_12h_starvation_Ca1a_Bmal1.csv'
+
+true_data = np.genfromtxt("../data/"+filename, delimiter=",", skip_header=3, skip_footer=1, missing_values=0)
+
+col = 6
+true_t = true_data[:,col]
+true_x = true_data[:,col+1]
+
+fit_x, inv_fit_x, fixed_x, pv_idx, new_idx = find_pv_single(true_data, col, save_plot=False, show_plot=False)
+
+per_t = np.diff(pv_idx[0])
+print(per_t)
+
+pow = 2
+coeffs = np.polyfit(true_t[pv_idx[0][:-1]], per_t, pow)
+fit_x = np.polyval(coeffs, true_t[pv_idx[0][:-1]])
+
+pred_x = [pv_idx[0][0]]
+for per in fit_x:
+	pred_x.append(pred_x[-1]+per)
+
+while(pred_x[-1] < true_t.shape[0]-fit_x[-1]):
+	pred_x.append(pred_x[-1]+fit_x[-1])
+	
+pred_x = np.array(pred_x).astype(int)
+
+print(pv_idx[0])
+plt.plot( true_t[pv_idx[0][:-1]], per_t, 'x')
+plt.plot( true_t[pv_idx[0][:-1]], fit_x, 'b--', label="polynomial fit (power "+str(pow)+")")
+plt.show()
+plt.clf()
+plt.plot( true_t, true_x )
+plt.plot( true_t[pv_idx], true_x[pv_idx], 'rx' )
+plt.show()
+
