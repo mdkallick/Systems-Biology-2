@@ -15,6 +15,7 @@ def find_pv_single(true_data, col, save_plot=True, show_plot=False):
 	true_t = true_data[:,col]
 	true_x = true_data[:,col+1]
 	
+	# remove the first day of data
 	cutoff = np.argmin(np.absolute(np.subtract(true_t, 1.0)))
 # 		print(true_t.shape)
 	true_t = true_t[cutoff:]
@@ -120,7 +121,7 @@ def find_pv_single(true_data, col, save_plot=True, show_plot=False):
 	if(show_plot):
 		plt.show()
 	plt.close()
-	return fit_x, inv_fit_x, fixed_x, pv_idx, new_idx
+	return fit_x, inv_fit_x, true_t, true_x, fixed_x, pv_idx, new_idx
 
 def find_pv_full(filename="021717_12h_starvation_Ca1a_Bmal1.csv", save_plot=True, show_plot=False):
 	true_data = np.genfromtxt(filename, delimiter=",", skip_header=3, skip_footer=1, missing_values=0);

@@ -49,37 +49,56 @@ def run_multiple_cos(N, num_parents, num_children, num_generations, tourney_size
 # plt.show()
 
 filename = '021717_12h_starvation_Ca1a_Bmal1.csv'
+# filename = '021717_12h_starvation_10A_Bmal1.csv'
 
 true_data = np.genfromtxt("../data/"+filename, delimiter=",", skip_header=3, skip_footer=1, missing_values=0)
 
 col = 6
-true_t = true_data[:,col]
-true_x = true_data[:,col+1]
+# true_t = true_data[:,col]
+# true_x = true_data[:,col+1]
 
-fit_x, inv_fit_x, fixed_x, pv_idx, new_idx = find_pv_single(true_data, col, save_plot=False, show_plot=False)
+fit_x, inv_fit_x, true_t, true_x, fixed_x, pv_idx, new_idx = \
+						find_pv_single(true_data, col, save_plot=False, show_plot=False)
 
 per_t = np.diff(pv_idx[0])
 print(per_t)
 
 pow = 2
 coeffs = np.polyfit(true_t[pv_idx[0][:-1]], per_t, pow)
-fit_x = np.polyval(coeffs, true_t[pv_idx[0][:-1]])
+fit_x = np.polyval(coeffs, true_t)
 
 pred_x = [pv_idx[0][0]]
-for per in fit_x:
-	pred_x.append(pred_x[-1]+per)
+# pred_x = [0]
+# for per in fit_x:
+# 	pred_x.append(pred_x[-1]+per)
 
-while(pred_x[-1] < true_t.shape[0]-fit_x[-1]):
-	pred_x.append(pred_x[-1]+fit_x[-1])
+
+while True:
+# 	print(pred_x[-1])
+	pred_x.append(pred_x[-1]+fit_x[(int)(pred_x[-1])])
+	if(true_t.shape[0] < pred_x[-1]):
+		pred_x.pop()
+# 		pred_x.pop(0) # remove the dummy first point
+		break
+	if(fit_x[(int)(pred_x[-1])] < 0):
+		break
 	
 pred_x = np.array(pred_x).astype(int)
+print(pred_x)
+
+print(true_t.shape)
+print(fixed_x.shape)
 
 print(pv_idx[0])
 plt.plot( true_t[pv_idx[0][:-1]], per_t, 'x')
-plt.plot( true_t[pv_idx[0][:-1]], fit_x, 'b--', label="polynomial fit (power "+str(pow)+")")
+plt.plot( true_t, fit_x, 'b--', label="polynomial fit (power "+str(pow)+")")
 plt.show()
 plt.clf()
 plt.plot( true_t, true_x )
-plt.plot( true_t[pv_idx], true_x[pv_idx], 'rx' )
+plt.scatter( true_t[pv_idx], true_x[pv_idx] )
+plt.scatter( true_t[pred_x], true_x[pred_x])
+plt.plot( true_t, fixed_x, 'm' )
+plt.scatter( true_t[pv_idx], fixed_x[pv_idx] )
+plt.scatter( true_t[pred_x], fixed_x[pred_x] )
 plt.show()
 
