@@ -31,6 +31,11 @@ def run_multiple_cos(N, num_parents, num_children, num_generations, tourney_size
     best_Pcost = best_Pcosts[best_ind]
     return best_P, best_Pcost
 
+# best_P = np.array([  5.    ,     946.62732358,  69.80521613, 171.24921375,  19.04053311,
+#  905.46152261, 230.99667462 ,930.91259142 ,513.27603457, 253.96031448,
+#  141.89190855, 971.58915881 ,317.85239937])
+
+
 # max = (0,0)
 # 
 # for filename in ["021717_12h_starvation_Ca1a_Bmal1.csv", "021717_12h_starvation_10A_Bmal1.csv"]:
@@ -53,17 +58,37 @@ filename = '021717_12h_starvation_Ca1a_Bmal1.csv'
 
 true_data = np.genfromtxt("../data/"+filename, delimiter=",", skip_header=3, skip_footer=1, missing_values=0)
 
-col = 6
+for i in range((int)(true_data.shape[1]/2)):
+	i=i*2
+	true_t = true_data[:,i]
+	true_x = true_data[:,i+1]
+	day1 = np.argmin(np.absolute(np.subtract(true_t, 1.0)))
+	true_t = true_data[:,i][day1:]
+	true_x = true_data[:,i+1][day1:]
+	plt.plot( true_t, true_x, linewidth=2 )
+day1 = np.argmin(np.absolute(np.subtract(true_t, 1.0)))
+plt.title("BMAL1 Oscillation Data")
+plt.xlabel("Time (days)")
+plt.ylabel("Counts per Second")
+# plt.axvline(true_t[day1])
+plt.show()
+
+col = 0
 # true_t = true_data[:,col]
 # true_x = true_data[:,col+1]
 
 fit_x, inv_fit_x, true_t, true_x, fixed_x, pv_idx, new_idx = \
 						find_pv_single(true_data, col, save_plot=False, show_plot=False)
 
-per_t = np.diff(pv_idx[0])
+per_t = np.multiply(np.diff(pv_idx[0]),2) #convert from half-period to full period
 print(per_t)
 
-pow = 2
+# convert the period from index change to time change (in hours)
+dt = np.average(np.diff(true_t))
+print(dt)
+per_t = np.multiply(per_t, (dt*24))
+
+pow = 3
 coeffs = np.polyfit(true_t[pv_idx[0][:-1]], per_t, pow)
 fit_x = np.polyval(coeffs, true_t)
 
@@ -84,21 +109,25 @@ while True:
 		break
 	
 pred_x = np.array(pred_x).astype(int)
-print(pred_x)
+# print(pred_x)
 
-print(true_t.shape)
-print(fixed_x.shape)
+# print(true_t.shape)
+# print(fixed_x.shape)
 
-print(pv_idx[0])
-plt.plot( true_t[pv_idx[0][:-1]], per_t, 'x')
-plt.plot( true_t, fit_x, 'b--', label="polynomial fit (power "+str(pow)+")")
+# print(pv_idx[0])
+plt.plot( true_t[pv_idx[0][:-1]], per_t, 'rx', mew=2, markersize=8, label="measured period (from found peaks and valleys)")
+plt.plot( true_t[:-100], fit_x[:-100], 'b--', linewidth=2, label="polynomial fit (power "+str(pow)+")")
+plt.legend(loc="best")
+plt.title("Oscillation Period over Time")
+plt.xlabel("Time (days)")
+plt.ylabel("Period (hours)")
 plt.show()
 plt.clf()
-plt.plot( true_t, true_x )
-plt.scatter( true_t[pv_idx], true_x[pv_idx] )
-plt.scatter( true_t[pred_x], true_x[pred_x])
-plt.plot( true_t, fixed_x, 'm' )
-plt.scatter( true_t[pv_idx], fixed_x[pv_idx] )
-plt.scatter( true_t[pred_x], fixed_x[pred_x] )
-plt.show()
+# plt.plot( true_t, true_x )
+# plt.scatter( true_t[pv_idx], true_x[pv_idx] )
+# plt.scatter( true_t[pred_x], true_x[pred_x])
+# plt.plot( true_t, fixed_x, 'm' )
+# plt.scatter( true_t[pv_idx], fixed_x[pv_idx] )
+# plt.scatter( true_t[pred_x], fixed_x[pred_x] )
+# plt.show()
 
