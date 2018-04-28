@@ -71,7 +71,8 @@ plt.title("BMAL1 Oscillation Data")
 plt.xlabel("Time (days)")
 plt.ylabel("Counts per Second")
 # plt.axvline(true_t[day1])
-plt.show()
+# plt.show()
+plt.clf()
 
 col = 0
 # true_t = true_data[:,col]
@@ -88,9 +89,9 @@ dt = np.average(np.diff(true_t))
 print(dt)
 per_t = np.multiply(per_t, (dt*24))
 
-pow = 3
-coeffs = np.polyfit(true_t[pv_idx[0][:-1]], per_t, pow)
-fit_x = np.polyval(coeffs, true_t)
+# pow = 3
+# coeffs = np.polyfit(true_t[pv_idx[0][:-1]], per_t, pow)
+# fit_x = np.polyval(coeffs, true_t)
 
 pred_x = [pv_idx[0][0]]
 # pred_x = [0]
@@ -114,6 +115,18 @@ pred_x = np.array(pred_x).astype(int)
 # print(true_t.shape)
 # print(fixed_x.shape)
 
+# plot the way that the inverted fit "fixes" the data
+plt.plot(true_t, fit_x, label="Polynomial fit (of degree 3)", linewidth=2 )
+plt.plot(true_t, inv_fit_x, label="Inverted polynomial fit", linewidth=2 )
+plt.plot(true_t, true_x, label="Original data", linewidth=2 )
+plt.plot(true_t, fixed_x, label="Corrected data", linewidth=2 )
+plt.legend(loc="best")
+plt.title("Correcting downwards slope with an inverted polynomial fit") 
+plt.xlabel("Time (days)")
+plt.ylabel("Counts per second")
+plt.show()
+plt.clf()
+
 # print(pv_idx[0])
 plt.plot( true_t[pv_idx[0][:-1]], per_t, 'rx', mew=2, markersize=8, label="measured period (from found peaks and valleys)")
 plt.plot( true_t[:-100], fit_x[:-100], 'b--', linewidth=2, label="polynomial fit (power "+str(pow)+")")
@@ -121,7 +134,7 @@ plt.legend(loc="best")
 plt.title("Oscillation Period over Time")
 plt.xlabel("Time (days)")
 plt.ylabel("Period (hours)")
-plt.show()
+# plt.show()
 plt.clf()
 # plt.plot( true_t, true_x )
 # plt.scatter( true_t[pv_idx], true_x[pv_idx] )
