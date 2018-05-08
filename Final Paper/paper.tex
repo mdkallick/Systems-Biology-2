@@ -1,0 +1,487 @@
+%% bare_conf.tex
+%% V1.4b
+%% 2015/08/26
+%% by Michael Shell
+%% See:
+%% http://www.michaelshell.org/
+%% for current contact information.
+%%
+%% This is a skeleton file demonstrating the use of IEEEtran.cls
+%% (requires IEEEtran.cls version 1.8b or later) with an IEEE
+%% conference paper.
+%%
+%% Support sites:
+%% http://www.michaelshell.org/tex/ieeetran/
+%% http://www.ctan.org/pkg/ieeetran
+%% and
+%% http://www.ieee.org/
+
+%%*************************************************************************
+%% Legal Notice:
+%% This code is offered as-is without any warranty either expressed or
+%% implied; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% User assumes all risk.
+%% In no event shall the IEEE or any contributor to this code be liable for
+%% any damages or losses, including, but not limited to, incidental,
+%% consequential, or any other damages, resulting from the use or misuse
+%% of any information contained here.
+%%
+%% All comments are the opinions of their respective authors and are not
+%% necessarily endorsed by the IEEE.
+%%
+%% This work is distributed under the LaTeX Project Public License (LPPL)
+%% ( http://www.latex-project.org/ ) version 1.3, and may be freely used,
+%% distributed and modified. A copy of the LPPL, version 1.3, is included
+%% in the base LaTeX documentation of all distributions of LaTeX released
+%% 2003/12/01 or later.
+%% Retain all contribution notices and credits.
+%% ** Modified files should be clearly indicated as such, including  **
+%% ** renaming them and changing author support contact information. **
+%%*************************************************************************
+
+
+% *** Authors should verify (and, if needed, correct) their LaTeX system  ***
+% *** with the testflow diagnostic prior to trusting their LaTeX platform ***
+% *** with production work. The IEEE's font choices and paper sizes can   ***
+% *** trigger bugs that do not appear when using other class files.       ***                          ***
+% The testflow support page is at:
+% http://www.michaelshell.org/tex/testflow/
+
+
+
+\documentclass[conference]{IEEEtran}
+% Some Computer Society conferences also require the compsoc mode option,
+% but others use the standard conference format.
+%
+% If IEEEtran.cls has not been installed into the LaTeX system files,
+% manually specify the path to it like:
+% \documentclass[conference]{../sty/IEEEtran}
+
+
+
+
+
+% Some very useful LaTeX packages include:
+% (uncomment the ones you want to load)
+
+
+% *** MISC UTILITY PACKAGES ***
+%
+%\usepackage{ifpdf}
+% Heiko Oberdiek's ifpdf.sty is very useful if you need conditional
+% compilation based on whether the output is pdf or dvi.
+% usage:
+% \ifpdf
+%   % pdf code
+% \else
+%   % dvi code
+% \fi
+% The latest version of ifpdf.sty can be obtained from:
+% http://www.ctan.org/pkg/ifpdf
+% Also, note that IEEEtran.cls V1.7 and later provides a builtin
+% \ifCLASSINFOpdf conditional that works the same way.
+% When switching from latex to pdflatex and vice-versa, the compiler may
+% have to be run twice to clear warning/error messages.
+
+
+
+
+
+
+% *** CITATION PACKAGES ***
+%
+%\usepackage{cite}
+% cite.sty was written by Donald Arseneau
+% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
+% \cite{} output to follow that of the IEEE. Loading the cite package will
+% result in citation numbers being automatically sorted and properly
+% "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
+% cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
+% \cite will automatically add leading space, if needed. Use cite.sty's
+% noadjust option (cite.sty V3.8 and later) if you want to turn this off
+% such as if a citation ever needs to be enclosed in parenthesis.
+% cite.sty is already installed on most LaTeX systems. Be sure and use
+% version 5.0 (2009-03-20) and later if using hyperref.sty.
+% The latest version can be obtained at:
+% http://www.ctan.org/pkg/cite
+% The documentation is contained in the cite.sty file itself.
+
+
+
+
+
+
+% *** GRAPHICS RELATED PACKAGES ***
+%
+\ifCLASSINFOpdf
+% \usepackage[pdftex]{graphicx}
+% declare the path(s) where your graphic files are
+% \graphicspath{{../pdf/}{../jpeg/}}
+% and their extensions so you won't have to specify these with
+% every instance of \includegraphics
+% \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+% or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+% will default to the driver specified in the system graphics.cfg if no
+% driver is specified.
+% \usepackage[dvips]{graphicx}
+% declare the path(s) where your graphic files are
+% \graphicspath{{../eps/}}
+% and their extensions so you won't have to specify these with
+% every instance of \includegraphics
+% \DeclareGraphicsExtensions{.eps}
+\fi
+% graphicx was written by David Carlisle and Sebastian Rahtz. It is
+% required if you want graphics, photos, etc. graphicx.sty is already
+% installed on most LaTeX systems. The latest version and documentation
+% can be obtained at: 
+% http://www.ctan.org/pkg/graphicx
+% Another good source of documentation is "Using Imported Graphics in
+% LaTeX2e" by Keith Reckdahl which can be found at:
+% http://www.ctan.org/pkg/epslatex
+%
+% latex, and pdflatex in dvi mode, support graphics in encapsulated
+% postscript (.eps) format. pdflatex in pdf mode supports graphics
+% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
+% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
+% not a bitmapped formats (.jpeg, .png). The IEEE frowns on bitmapped formats
+% which can result in "jaggedy"/blurry rendering of lines and letters as
+% well as large increases in file sizes.
+%
+% You can find documentation about the pdfTeX application at:
+% http://www.tug.org/applications/pdftex
+
+
+
+
+
+% *** MATH PACKAGES ***
+%
+%\usepackage{amsmath}
+% A popular package from the American Mathematical Society that provides
+% many useful and powerful commands for dealing with mathematics.
+%
+% Note that the amsmath package sets \interdisplaylinepenalty to 10000
+% thus preventing page breaks from occurring within multiline equations. Use:
+%\interdisplaylinepenalty=2500
+% after loading amsmath to restore such page breaks as IEEEtran.cls normally
+% does. amsmath.sty is already installed on most LaTeX systems. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/pkg/amsmath
+
+
+
+
+
+% *** SPECIALIZED LIST PACKAGES ***
+%
+%\usepackage{algorithmic}
+% algorithmic.sty was written by Peter Williams and Rogerio Brito.
+% This package provides an algorithmic environment fo describing algorithms.
+% You can use the algorithmic environment in-text or within a figure
+% environment to provide for a floating algorithm. Do NOT use the algorithm
+% floating environment provided by algorithm.sty (by the same authors) or
+% algorithm2e.sty (by Christophe Fiorio) as the IEEE does not use dedicated
+% algorithm float types and packages that provide these will not provide
+% correct IEEE style captions. The latest version and documentation of
+% algorithmic.sty can be obtained at:
+% http://www.ctan.org/pkg/algorithms
+% Also of interest may be the (relatively newer and more customizable)
+% algorithmicx.sty package by Szasz Janos:
+% http://www.ctan.org/pkg/algorithmicx
+
+
+
+
+% *** ALIGNMENT PACKAGES ***
+%
+%\usepackage{array}
+% Frank Mittelbach's and David Carlisle's array.sty patches and improves
+% the standard LaTeX2e array and tabular environments to provide better
+% appearance and additional user controls. As the default LaTeX2e table
+% generation code is lacking to the point of almost being broken with
+% respect to the quality of the end results, all users are strongly
+% advised to use an enhanced (at the very least that provided by array.sty)
+% set of table tools. array.sty is already installed on most systems. The
+% latest version and documentation can be obtained at:
+% http://www.ctan.org/pkg/array
+
+
+% IEEEtran contains the IEEEeqnarray family of commands that can be used to
+% generate multiline equations as well as matrices, tables, etc., of high
+% quality.
+
+
+
+
+% *** SUBFIGURE PACKAGES ***
+%\ifCLASSOPTIONcompsoc
+%  \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+%\else
+%  \usepackage[caption=false,font=footnotesize]{subfig}
+%\fi
+% subfig.sty, written by Steven Douglas Cochran, is the modern replacement
+% for subfigure.sty, the latter of which is no longer maintained and is
+% incompatible with some LaTeX packages including fixltx2e. However,
+% subfig.sty requires and automatically loads Axel Sommerfeldt's caption.sty
+% which will override IEEEtran.cls' handling of captions and this will result
+% in non-IEEE style figure/table captions. To prevent this problem, be sure
+% and invoke subfig.sty's "caption=false" package option (available since
+% subfig.sty version 1.3, 2005/06/28) as this is will preserve IEEEtran.cls
+% handling of captions.
+% Note that the Computer Society format requires a larger sans serif font
+% than the serif footnote size font used in traditional IEEE formatting
+% and thus the need to invoke different subfig.sty package options depending
+% on whether compsoc mode has been enabled.
+%
+% The latest version and documentation of subfig.sty can be obtained at:
+% http://www.ctan.org/pkg/subfig
+
+
+
+
+% *** FLOAT PACKAGES ***
+%
+%\usepackage{fixltx2e}
+% fixltx2e, the successor to the earlier fix2col.sty, was written by
+% Frank Mittelbach and David Carlisle. This package corrects a few problems
+% in the LaTeX2e kernel, the most notable of which is that in current
+% LaTeX2e releases, the ordering of single and double column floats is not
+% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
+% single column figure to be placed prior to an earlier double column
+% figure.
+% Be aware that LaTeX2e kernels dated 2015 and later have fixltx2e.sty's
+% corrections already built into the system in which case a warning will
+% be issued if an attempt is made to load fixltx2e.sty as it is no longer
+% needed.
+% The latest version and documentation can be found at:
+% http://www.ctan.org/pkg/fixltx2e
+
+
+%\usepackage{stfloats}
+% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
+% the ability to do double column floats at the bottom of the page as well
+% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
+% LaTeX2e). It also provides a command:
+%\fnbelowfloat
+% to enable the placement of footnotes below bottom floats (the standard
+% LaTeX2e kernel puts them above bottom floats). This is an invasive package
+% which rewrites many portions of the LaTeX2e float routines. It may not work
+% with other packages that modify the LaTeX2e float routines. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/pkg/stfloats
+% Do not use the stfloats baselinefloat ability as the IEEE does not allow
+% \baselineskip to stretch. Authors submitting work to the IEEE should note
+% that the IEEE rarely uses double column equations and that authors should try
+% to avoid such use. Do not be tempted to use the cuted.sty or midfloat.sty
+% packages (also by Sigitas Tolusis) as the IEEE does not format its papers in
+% such ways.
+% Do not attempt to use stfloats with fixltx2e as they are incompatible.
+% Instead, use Morten Hogholm'a dblfloatfix which combines the features
+% of both fixltx2e and stfloats:
+%
+% \usepackage{dblfloatfix}
+% The latest version can be found at:
+% http://www.ctan.org/pkg/dblfloatfix
+
+
+
+
+% *** PDF, URL AND HYPERLINK PACKAGES ***
+%
+%\usepackage{url}
+% url.sty was written by Donald Arseneau. It provides better support for
+% handling and breaking URLs. url.sty is already installed on most LaTeX
+% systems. The latest version and documentation can be obtained at:
+% http://www.ctan.org/pkg/url
+% Basically, \url{my_url_here}.
+
+
+
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+% There should be no need to do such things with IEEEtran.cls V1.6 and later.
+% (Unless specifically asked to do so by the journal or conference you plan
+% to submit to, of course. )
+
+\usepackage{hyperref, graphicx}
+
+\usepackage{graphicx}
+\usepackage{caption}
+%\usepackage{subfig}
+\usepackage{subcaption}
+\usepackage{listings}
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+	%
+	% paper title
+	% Titles are generally capitalized except for words such as a, an, and, as,
+	% at, but, by, for, in, nor, of, on, or, the, to and up, which are usually
+	% not capitalized unless they are the first or last word of the title.
+	% Linebreaks \\ can be used within to get better formatting as desired.
+	% Do not put math or special symbols in the title.
+	\title{Systems Biology II \\Adapting classical fitting algorithms to cancer-damaged cell oscillations\\}
+	
+	
+	% author names and affiliations
+	% use a multiple column layout for up to three different
+	% affiliations
+	\author{\IEEEauthorblockN{Mathias D. Kallick}
+		\IEEEauthorblockA{Department of Computer Science\\
+			Colby College\\
+			Waterville, ME, 04901\\
+			Email: mkallick@colby.edu}
+		\and
+		\IEEEauthorblockN{Neil K. Sefah}
+		\IEEEauthorblockA{Department of Computer Science\\
+			Colby College\\
+			Waterville, ME, 04901\\
+			Email: nksefah@colby.edu}
+		\and
+		\IEEEauthorblockN{Dakota Thompson}
+		\IEEEauthorblockA{Department of Computer Science\\
+			Colby College\\
+			Waterville, ME, 04901\\
+			Email: dthompso@colby.edu}
+	}
+	
+	% conference papers do not typically use \thanks and this command
+	% is locked out in conference mode. If really needed, such as for
+	% the acknowledgment of grants, issue a \IEEEoverridecommandlockouts
+	% after \documentclass
+	
+	% for over three affiliations, or if they all won't fit within the width
+	% of the page, use this alternative format:
+	% 
+	%\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
+	%Homer Simpson\IEEEauthorrefmark{2},
+	%James Kirk\IEEEauthorrefmark{3}, 
+	%Montgomery Scott\IEEEauthorrefmark{3} and
+	%Eldon Tyrell\IEEEauthorrefmark{4}}
+	%\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
+	%Georgia Institute of Technology,
+	%Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
+	%\IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
+	%Email: homer@thesimpsons.com}
+	%\IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
+	%Telephone: (800) 555--1212, Fax: (888) 555--1212}
+	%\IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
+	
+	
+	
+	
+	% use for special paper notices
+	%\IEEEspecialpapernotice{(Invited Paper)}
+	
+	
+	
+	
+	% make the title area
+	\maketitle
+	
+	% As a general rule, do not put math, special symbols or citations
+	% in the abstract
+	\begin{abstract}
+		
+	\end{abstract}
+	
+	% no keywords
+	
+	
+	
+	
+	% For peer review papers, you can put extra information on the cover
+	% page as needed:
+	% \ifCLASSOPTIONpeerreview
+	% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
+	% \fi
+	%
+	% For peerreview papers, this IEEEtran command inserts a page break and
+	% creates the second title. It will be ignored for other modes.
+	%\IEEEpeerreviewmaketitle
+
+\section{Introduction}
+
+\section{The Need for Smoothing}
+
+%\begin{figure}[!h]
+%	\centering
+%	\includegraphics[width=\linewidth]{{"plots/unsmoothed_data"}.png}
+%	\caption{Look at this mess. Look upon it, and weep.}
+%	\label{fig:unsmoothed_data}
+%\end{figure}
+
+\section{Windowing}
+One of the core problems we needed to solve before tackling any others was making our data smoother. Initially, all of the data we worked with was extremely noisy, and yielded problems when we initially attempted to detect peaks or find accurate periods. In pursuing this, all other computation related to the project run would run much more efficiently and with less error. The primary method that we started smoothing with filters. The first that we got to work properly was the Savitzky-Golay filter, one developed by increasing the signal-to-noise ratio of the plot without entirely corrupting the signal. To do this it essentially generates new fitted subsets of the data according to an equation. While this method has been working pretty effectively for us so far, we wanted to find out whether or not we could find better results by trying to create new filters based on different functions. For this, we turned to window functions; methods that are designed to fit data zero-valued/normalized according to a given interval, using an equation. These were normally used in signal processing, but, could potentially be used to smooth any plot that was given as a signal, depending on its purpose.
+
+However, most of these proved ineffective. The windowing methods we tested were primarily the ones most commonly used in signal processing/general usage. These included, the Hamming window function, the Blackman Harris, the Flat-Top, and the Bartlett-Hann functions. However, all of them yielded problematic results, as they would not give us accurate period detection, no matter what we tried. Considering the nature of these functions (with most of them being derivatives of a core few, which we tested for), we then concluded that these would be ineffective for our purposes.
+
+We had also tried to apply a few methods of dealing with outliers in the data, however, actual filters trumped those as well. 
+
+\section{Genetic Algorithms}
+
+One of the most common ways to tackle the period-finding problem is to do curve fitting. That is, find the correct parameters to a function in order to get the difference between that function’s outputs and the true data as small as possible. Then, we extract the period from that function (since it should be easy to mathematically determine the period from a set function). Although this method works extremely well, it should also be clear that finding the correct parameters for the function is prohibitively time-consuming (since the potential options are infinite, and testing each set of parameters requires an evaluation of the function at every time step). However, given how common this approach is (and how common the parameter-finding problem is), a large number of algorithms exist to get approximate best parameters in more reasonable computation times.
+For this problem, we chose to use a genetic algorithm, which is one of the most common ways to do parameter-finding (also, Mathias had working code from Systems Biology I, so it was relatively easy to implement). Genetic algorithms are meant to emulate the way that evolution works (in the loosest sense of the word). To do this, they take a random sampling of the parameter space, to get the parameters for the first group of parents (each of which is simply a full parameter set for the function, so for example, for Equation \ref{eq:mFourFit}, we would have a C, five As, five {$\phi$}s, and a $\tau$). The next step is to evaluate the quality of each parameter set using a cost function (for us, this was simply a least-squares difference between our data and the function defined with each parameter set), and sort the parents according to the quality of their fit. Once the parents have been sorted, we take a subset of the parents according to a selection strategy. What we used for this project was tournament selection - for each parent that we pick, we first pick a random subset of the parents, then we take the best parent from that subset. For this version of a genetic algorithm, we pick the same number of parents as we had in the last round - we just pick the best parents multiple times, and exclude the worst parents, by design. This whole process is then repeated for either a set number of generations (in our case, 10-20), or until the error for the best parameter set becomes lower than some threshold. The best parameter set at the end of this process then becomes the parameters that we use for the function.
+
+\section{Zielinski et al. - Multiple Cos Fitting}
+Given that this approach is the tried and true approach to period-finding, we decided to use it as a starting point for this project. Zielinski, Moore, et al. published a paper detailing various methods of period finding for circadian data, from which we took our first function, which is called mFourFit. This function (seen in Equation \ref{eq:mFourFit}) makes the assumption that any periodic data can be represented as a linear combination of cosines with different periods. It simply adds together $j$ cosines, where cosine $i$ has period $\tau/i$ and amplitude $A_i$. It also makes the assumption that it is possible to model the data using only periods that are multiples of each other (so there is one base period, $\tau$, and then the rest of the periods are $\tau$ divided by an integer, $i$). An example of a function generated using mFourFit and a random set of parameters can be seen in Figure \ref{fig:mFourFit_ex}. 
+Zielinski also described another function, FFT-NLLS, which can be seen in Equation \ref{eq:FFT-NLLS}. FFT-NLLS is very similar to mFourFit, but it doesn’t assume that the periods are multiples of each other. Instead, it uses $j$ individual periods that are all found during the parameter-finding phase. This potentially provides a better fit to messier data, but at the same time it dramatically increases the computation cost of parameter-fitting.
+
+\begin{equation} \label{eq:mFourFit}
+f(x) = C + \sum_{i=1}^{5} A_i \cos(\frac{2 \pi (t - \phi_i)}{\tau/i})
+\end{equation}
+
+\begin{equation} \label{eq:FFT-NLLS}
+f(x) = C + \sum_{i=1}^{5} A_i \cos(\frac{2 \pi (t - \phi_i)}{\tau_i})
+\end{equation}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\linewidth]{{"plots/FourFit_GA_match"}.png}
+	\caption{A plot of artificially generated data that has then been fit to using the mFourFit equation.}
+	\label{fig:mFourFit_ex}
+\end{figure}
+
+For this project, we used a genetic algorithm to fit parameters for both FourFit and FFT-NLLS. Unfortunately, it quickly became clear that despite running our genetic algorithms for 10-15 hours, we still found that the fitting would simply fit a curve through the middle of our oscillations, picking up the general trend of the data, but not the individual oscillations (that is, totally missing the peaks and valleys). An example of this for FFT-NLLS can be seen in Figure \ref{fig:FFT-NLLS_real}. FourFit looks exactly the same, but trains faster because there are significantly less parameters. This was a truly discouraging result, given that this was the most well-known way of producing the periodicity of data. That said, we were still able to get some interesting information with this fitting, since the fitting would still recognize the overall trend of the data. The downwards trend of the data was a big part of the messiness that made this data hard to work with, so knowing the trend would allow us to correct that trend and work with easier data.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\linewidth]{{"plots/NLLS_GA_realdata"}.png}
+	\caption{A plot of our real data, and the fit we found using a genetic algorithm with FFT-NLLS. The fit does not get the individual oscillations, but it does find the general trend of the data.}
+	\label{fig:FFT-NLLS_real}
+\end{figure}
+
+
+\section{Correcting the Data with Polynomial Fit}
+When we first realized that we could use the genetic algorithm to correct the data, we were very excited to have solved one of our major issues with the data. However, we soon noticed a major issue - running a fitting algorithm for 10 hours on a single dataset is not the most efficient way to clean data. At that point it is cheaper and easier to have a human do it. Our solution to this problem was to look for a simpler fitting algorithm. After testing a few, we settled on simply using a third-degree polynomial fit to find the trend of the data. This is a much lower level fitting algorithm, and it does not fit complex data nearly as well as the FourFit or FFT-NLLS functions, but our data’s downwards trend is pretty simply, so it works very well for that, and, importantly, it fits quickly enough that it is not a noticeable slowdown in our code.
+As can be seen in Figure \ref{fig:poly_fit}, the third-degree polynomial fit finds the trend in our data perfectly. If we then invert the fit, and add it to the raw data, we get a corrected dataset (Figure \ref{fig:correcting_with_poly}) that is much, much easier to analyze. This result allowed us to improve our peak finding substantially.
+
+
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\linewidth]{{"plots/corrected_poly"}.png}
+	\caption{Using the third-degree polynomial fit to find the downwards trend of our data, and correcting the data based on that downwards trend.}
+	\label{fig:correcting_with_poly}
+\end{figure}
+
+
+\section{Peak Finding with Derivatives}
+
+\section{Our Peak Detection Process}
+
+\section{Using Peaks to Find the Period as a Function of Time}
+
+\section{Conclusion}
+
+\section{Acknowledgments}
+
+\section{References}
+
+\end{document}

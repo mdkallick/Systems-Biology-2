@@ -37,25 +37,26 @@ def run_multiple_cos(N, num_parents, num_children, num_generations, tourney_size
 
 
 # max = (0,0)
-# 
+#
 # for filename in ["021717_12h_starvation_Ca1a_Bmal1.csv", "021717_12h_starvation_10A_Bmal1.csv"]:
 # 	tmpmax = find_pv_full("../data/"+filename, save_plot=False)
 # 	print(tmpmax)
 # 	if(tmpmax[0] > max[0]):
 # 		max = (tmpmax[0], (tmpmax[1], filename))
 # print(max)
-# 
+#
 # true_data = np.genfromtxt("021717_12h_starvation_Ca1a_Bmal1.csv", delimiter=",", skip_header=3, skip_footer=1, missing_values=0);
-# 
+#
 # true_t = true_data[:,4]
 # true_x = true_data[:,5]
-# 
+#
 # plt.plot( true_t, true_x, 'r')
 # plt.show()
 
 filename = '021717_12h_starvation_Ca1a_Bmal1.csv'
 # filename = '021717_12h_starvation_10A_Bmal1.csv'
 
+print("../data/"+filename)
 true_data = np.genfromtxt("../data/"+filename, delimiter=",", skip_header=3, skip_footer=1, missing_values=0)
 
 for i in range((int)(true_data.shape[1]/2)):
@@ -107,12 +108,20 @@ while True:
 		break
 	if(fit_x[(int)(pred_x[-1])] < 0):
 		break
-	
+
 pred_x = np.array(pred_x).astype(int)
 # print(pred_x)
 
 # print(true_t.shape)
 # print(fixed_x.shape)
+
+# generate plot that shows the inverted fit fixing the data
+plt.plot( fit_x, true_t )
+plt.plot( inv_fit_x, true_t )
+plt.plot( fixed_x, true_t )
+plt.plot( true_x, true_t )
+plt.show()
+plt.clf()
 
 # print(pv_idx[0])
 plt.plot( true_t[pv_idx[0][:-1]], per_t, 'rx', mew=2, markersize=8, label="measured period (from found peaks and valleys)")
@@ -130,4 +139,3 @@ plt.clf()
 # plt.scatter( true_t[pv_idx], fixed_x[pv_idx] )
 # plt.scatter( true_t[pred_x], fixed_x[pred_x] )
 # plt.show()
-
