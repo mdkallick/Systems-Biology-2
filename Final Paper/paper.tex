@@ -477,6 +477,15 @@ As can be seen in Figure \ref{fig:poly_fit}, the third-degree polynomial fit fin
 \section{Our Peak Detection Process}
 
 \section{Using Peaks to Find the Period as a Function of Time}
+Having found the peaks and troughs, we need to find the period of the oscillations in the data (since that was our original goal). Normally, the way to turn a set of peaks and troughs into a period would be to find the difference in time between each successive peak and trough and then double that time (since the period is defined as peak-to-peak time, not peak-to-trough time). However, our data does not have a consistent period, so doing that would provide a misleading result. In order to remedy that, we calculated our period for each pair of peaks and troughs (so for peak one to trough one, then from trough one to peak two, and so on). We then plotted this against the time that the peaks were found at (See Figure \ref{fig:per_over_time}). This gives us an idea of the period at discrete points throughout the data, but we wanted to see how the period changed continuously over time as the oscillations occurred. In order to do this, we simply plotted a third-degree fit to the discrete period measurements (again, see Figure \ref{fig:per_over_time}), which allows us to get a sense of the instantaneous change over the data collection window. 
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\linewidth]{{"plots/corrected_poly"}.png}
+	\caption{A plot of the found period over time of one of our datasets. We also plotted the third-degree polynomial fit of the found period data in order to get a continuous function of the period over time.}
+	\label{fig:per_over_time}
+\end{figure}
+
 
 \section{Conclusion}
 
