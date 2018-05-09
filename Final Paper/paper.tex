@@ -313,6 +313,7 @@
 %\usepackage{subfig}
 \usepackage{subcaption}
 \usepackage{listings}
+\usepackage{cite}
 
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
@@ -412,7 +413,7 @@ The study of circadian clocks within organisms has been a growing field in syste
 Moving forward with the task of determining the period we proceeded with several initial steps.  This included analysing smoothing techniques as we needed to smooth the data while ensuring that it remained as true to the actual data as possible through manipulations and derivatives.   Additionally, the use of genetic algorithms to create a multiple cosines function for obtaining the periodicity was explored.  The classic use of derivatives for finding peaks to calculate the period was also investigated for determining the best automated period detection tool.
 
 \section{The Need for Smoothing}
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{{"plots/unsmoothed_data"}.png}
 	\caption{Look at this mess. Look upon it, and weep.}
@@ -424,7 +425,7 @@ One of the core problems we needed to solve before tackling any others was makin
 
 However, most of these proved ineffective. The windowing methods we tested were primarily the ones most commonly used in signal processing/general usage. These included the Hamming window function, the Blackman Harris, the Flat-Top, and the Bartlett-Hann functions. 
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{{"plots/grid"}.jpg}
 	\caption{Hamming and Flattop Window Test: Using MATLAB code, this shows us one of the sets of data, and shows the effect of using the Hamming and Flattop window functions to dampen it. The bottom result is supposed to show us the periods detected after the application of the algorithm, however, it is not detecting the periods properly, likely due to the cancerous data. This is further confirmed by the period being detected, which is much larger than it should be, as the periods should be 20-30h at best. The explicit use versus the ones matrix indicates if there was an additional matrix used in mitigating the effects of the algorithm on the signal. Explicit use meant no additional matrix was used, ones matrix indicates that ones matrix was used.}
@@ -441,7 +442,7 @@ One of the most common ways to tackle the period-finding problem is to do curve 
 For this problem, we chose to use a genetic algorithm, which is one of the most common ways to do parameter-finding (also, Mathias had working code from Systems Biology I, so it was relatively easy to implement). Genetic algorithms are meant to emulate the way that evolution works (in the loosest sense of the word). To do this, they take a random sampling of the parameter space, to get the parameters for the first group of parents (each of which is simply a full parameter set for the function, so for example, for Equation \ref{eq:mFourFit}, we would have a C, five As, five {$\phi$}s, and a $\tau$). The next step is to evaluate the quality of each parameter set using a cost function (for us, this was simply a least-squares difference between our data and the function defined with each parameter set), and sort the parents according to the quality of their fit. Once the parents have been sorted, we take a subset of the parents according to a selection strategy. What we used for this project was tournament selection - for each parent that we pick, we first pick a random subset of the parents, then we take the best parent from that subset. For this version of a genetic algorithm, we pick the same number of parents as we had in the last round - we just pick the best parents multiple times, and exclude the worst parents, by design. This whole process is then repeated for either a set number of generations (in our case, 10-20), or until the error for the best parameter set becomes lower than some threshold. The best parameter set at the end of this process then becomes the parameters that we use for the function.
 
 \section{Zielinski et al. - Multiple Cos Fitting}
-Given that this approach is the tried and true approach to period-finding, we decided to use it as a starting point for this project. Zielinski, Moore, et al. published a paper detailing various methods of period finding for circadian data, from which we took our first function, which is called mFourFit. This function (seen in Equation \ref{eq:mFourFit}) makes the assumption that any periodic data can be represented as a linear combination of cosines with different periods. It simply adds together $j$ cosines, where cosine $i$ has period $\tau/i$ and amplitude $A_i$. It also makes the assumption that it is possible to model the data using only periods that are multiples of each other (so there is one base period, $\tau$, and then the rest of the periods are $\tau$ divided by an integer, $i$). An example of a function generated using mFourFit and a random set of parameters can be seen in Figure \ref{fig:mFourFit_ex}. 
+Given that this approach is the tried and true approach to period-finding, we decided to use it as a starting point for this project. Zielinski, Moore, et al. published a paper detailing various methods of period finding for circadian data \cite{Zielinski}, from which we took our first function, which is called mFourFit. This function (seen in Equation \ref{eq:mFourFit}) makes the assumption that any periodic data can be represented as a linear combination of cosines with different periods. It simply adds together $j$ cosines, where cosine $i$ has period $\tau/i$ and amplitude $A_i$. It also makes the assumption that it is possible to model the data using only periods that are multiples of each other (so there is one base period, $\tau$, and then the rest of the periods are $\tau$ divided by an integer, $i$). An example of a function generated using mFourFit and a random set of parameters can be seen in Figure \ref{fig:mFourFit_ex}. 
 Zielinski also described another function, FFT-NLLS, which can be seen in Equation \ref{eq:FFT-NLLS}. FFT-NLLS is very similar to mFourFit, but it doesn’t assume that the periods are multiples of each other. Instead, it uses $j$ individual periods that are all found during the parameter-finding phase. This potentially provides a better fit to messier data, but at the same time it dramatically increases the computation cost of parameter-fitting.
 
 \begin{equation} \label{eq:mFourFit}
@@ -452,7 +453,7 @@ f(x) = C + \sum_{i=1}^{5} A_i \cos(\frac{2 \pi (t - \phi_i)}{\tau/i})
 f(x) = C + \sum_{i=1}^{5} A_i \cos(\frac{2 \pi (t - \phi_i)}{\tau_i})
 \end{equation}
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{{"plots/FourFit_GA_match"}.png}
 	\caption{A plot of artificially generated data that has then been fit to using the mFourFit equation.}
@@ -461,7 +462,7 @@ f(x) = C + \sum_{i=1}^{5} A_i \cos(\frac{2 \pi (t - \phi_i)}{\tau_i})
 
 For this project, we used a genetic algorithm to fit parameters for both FourFit and FFT-NLLS. Unfortunately, it quickly became clear that despite running our genetic algorithms for 10-15 hours, we still found that the fitting would simply fit a curve through the middle of our oscillations, picking up the general trend of the data, but not the individual oscillations (that is, totally missing the peaks and valleys). An example of this for FFT-NLLS can be seen in Figure \ref{fig:FFT-NLLS_real}. FourFit looks exactly the same, but trains faster because there are significantly less parameters. This was a truly discouraging result, given that this was the most well-known way of producing the periodicity of data. That said, we were still able to get some interesting information with this fitting, since the fitting would still recognize the overall trend of the data. The downwards trend of the data was a big part of the messiness that made this data hard to work with, so knowing the trend would allow us to correct that trend and work with easier data.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{{"plots/NLLS_GA_realdata"}.png}
 	\caption{A plot of our real data, and the fit we found using a genetic algorithm with FFT-NLLS. The fit does not get the individual oscillations, but it does find the general trend of the data.}
@@ -473,7 +474,7 @@ For this project, we used a genetic algorithm to fit parameters for both FourFit
 When we first realized that we could use the genetic algorithm to correct the data, we were very excited to have solved one of our major issues with the data. However, we soon noticed a major issue - running a fitting algorithm for 10 hours on a single dataset is not the most efficient way to clean data. At that point it is cheaper and easier to have a human do it. Our solution to this problem was to look for a simpler fitting algorithm. After testing a few, we settled on simply using a third-degree polynomial fit to find the trend of the data. This is a much lower level fitting algorithm, and it does not fit complex data nearly as well as the FourFit or FFT-NLLS functions, but our data’s downwards trend is pretty simply, so it works very well for that, and, importantly, it fits quickly enough that it is not a noticeable slowdown in our code.
 As can be seen in Figure \ref{fig:poly_fit}, the third-degree polynomial fit finds the trend in our data perfectly. If we then invert the fit, and add it to the raw data, we get a corrected dataset (Figure \ref{fig:correcting_with_poly}) that is much, much easier to analyze. This result allowed us to improve our peak finding substantially.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{{"plots/corrected_poly"}.png}
 	\caption{Using the third-degree polynomial fit to find the downwards trend of our data, and correcting the data based on that downwards trend.}
@@ -484,14 +485,14 @@ As can be seen in Figure \ref{fig:poly_fit}, the third-degree polynomial fit fin
 \section{Peak Finding with Derivatives}
 Standard peak finding techniques have traditionally relied on the first derivative to find peaks and valleys.  This process looks for where the first derivative crosses zero and depending on the direction a peak (positive to negative) or valley (negative to positive) is found.  When applying this technique the first derivative correctly detects most peaks and valleys.  However, due to damping and the downward trend of the data it fails to find peaks that optically appear to be significant in the systems period.  This can be seen in Figure \ref{fig:first_drv_fail} as in between the first and last valley peak pairing there appears to be an oscillation in the data that doesn't fully pass the first derivatives threshold.  Thus to find the optically noticeable peaks we needed a more sensitive measure for which we turned to the third derivative.  The Third derivative operates in the same manner as the first derivative for finding peaks and valley but it also looks at the curvature of the data as well.  The third derivative correctly detects peaks and valley including the visually significant peaks and valleys.  However, it also detects peaks and valleys where there don't appear to be any significant to the periodicity which can be seen in Figure \ref{fig:third_drv_fail}.  This signified a hybrid method with a sensitivity greater than the pure first derivative and less than the pure third derivative would be required.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{{"plots/first_drv_fail"}.png}
 	\caption{Using the first derivative to find peaks.}
 	\label{fig:first_drv_fail}
 \end{figure}
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{{"plots/third_drv_fail"}.png}
 	\caption{Using the third derivative to find peaks.}
@@ -502,7 +503,7 @@ Standard peak finding techniques have traditionally relied on the first derivati
 \section{Our Peak Detection Process}
 The final peak detection method utilized correcting data through polynomial fitting, the first derivative, and the third derivative.  First the data was smoothed using the Savitzky-Golay filter to remove noise from the data.  A third degree polynomial was fit to the dataset, thus identifying the major damping trend.  This third degree polynomial was then inverted and added to the actual data thereby removing the overarching damping and creating a corrected dataset.  By removing the overarching damping trend optical peaks became more susceptible to detection by the first derivative. The peak and valley identification subsequently began by using the first derivative to identify peaks and valleys in the corrected dataset.  The average time between peaks and valleys was then calculated and if a gap between peaks and valleys larger than 1.33 times the average distance was detected it was marked as missing a peaks and/or valleys.  The third derivative was then applied to the uncorrected data strictly within identified gaps to find the remaining peaks and valleys.  The peaks and valleys initially found with the first derivative of the corrected data and those found using the third derivative on the uncorrected data in identified gaps were then consolidated on the uncorrected data to return the set of final peaks and valleys.  With the final set of peaks and valleys the period could then be calculated.  This process is shown in Figure \ref{fig:pv_det_final}.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{{"plots/pv_det_final"}.png}
 	\caption{Our final peak and valley detection process. This process worked consistently for every dataset that we tried it on.}
@@ -512,7 +513,7 @@ The final peak detection method utilized correcting data through polynomial fitt
 \section{Using Peaks to Find the Period as a Function of Time}
 Having found the peaks and troughs, we need to find the period of the oscillations in the data (since that was our original goal). Normally, the way to turn a set of peaks and troughs into a period would be to find the difference in time between each successive peak and trough and then double that time (since the period is defined as peak-to-peak time, not peak-to-trough time). However, our data does not have a consistent period, so doing that would provide a misleading result. In order to remedy that, we calculated our period for each pair of peaks and troughs (so for peak one to trough one, then from trough one to peak two, and so on). We then plotted this against the time that the peaks were found at (See Figure \ref{fig:per_over_time}). This gives us an idea of the period at discrete points throughout the data, but we wanted to see how the period changed continuously over time as the oscillations occurred. In order to do this, we simply plotted a third-degree fit to the discrete period measurements (again, see Figure \ref{fig:per_over_time}), which allows us to get a sense of the instantaneous change over the data collection window. 
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{{"plots/corrected_poly"}.png}
 	\caption{A plot of the found period over time of one of our datasets. We also plotted the third-degree polynomial fit of the found period data in order to get a continuous function of the period over time.}
@@ -553,41 +554,18 @@ The authors would like to thank Stephanie Taylor for all of her amazing help gui
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references
 % (used to reserve space for the reference number labels box)
-\begin{thebibliography}{1}
-\bibitem{FourFit}
+\begin{thebibliography}{3}
+\bibitem{Zielinski}
 Zielinski T, Moore AM, Troup E, Halliday KJ, Millar AJ (2014). \emph{Strengths and Limitations of Period Estimation Methods for Circadian Data}. PLoS ONE 9(5):e96462. doi:10.1371/journal.pone.0096462
 
-@Misc{,
-  author =    {Eric Jones and Travis Oliphant and Pearu Peterson and others},
-  title =     {{SciPy}: Open source scientific tools for {Python}},
-  year =      {2001--},
-  url = "http://www.scipy.org/",
-  note = {[Online; accessed <today>]}
-}
+\bibitem{SciPy}
+Eric Jones and Travis Oliphant and Pearu Peterson and others (2001--). \emph{{SciPy}: Open source scientific tools for {Python}}. "http://www.scipy.org/", {[Online; accessed 5/8/2018]}
 
-@Article{Hunter:2007,
-  Author    = {Hunter, J. D.},
-  Title     = {Matplotlib: A 2D graphics environment},
-  Journal   = {Computing In Science \& Engineering},
-  Volume    = {9},
-  Number    = {3},
-  Pages     = {90--95},
-  abstract  = {Matplotlib is a 2D graphics package used for Python
-  for application development, interactive scripting, and
-  publication-quality image generation across user
-  interfaces and operating systems.},
-  publisher = {IEEE COMPUTER SOC},
-  doi       = {10.1109/MCSE.2007.55},
-  year      = 2007
-}
+\bibitem{Matplotlib}
+Hunter, J. D. (2007). \emph{Matplotlib: A 2D graphics environment}. Computing In Science \& Engineering, IEEE COMPUTER SOC, 10.1109/MCSE.2007.55.
 
-@misc(MatlabOTB,
-  key = {MATLAB Optimization Toolbox},
-  title = {MATLAB Optimization Toolbox},
-  year = {2017}
-  note = {The MathWorks, Natick, MA, USA}
-}
-
+\bibitem{MatLab}
+(2017). \emph{MATLAB Optimization Toolbox}. The MathWorks, Natick, MA, USA.
 
 \end{thebibliography}
 

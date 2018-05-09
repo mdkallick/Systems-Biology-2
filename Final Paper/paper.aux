@@ -18,22 +18,38 @@
 \providecommand\HyField@AuxAddToCoFields[2]{}
 \@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}}
 \@writefile{toc}{\contentsline {section}{\numberline {II}The Need for Smoothing}{1}{section.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {III}Windowing}{1}{section.3}}
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Genetic Algorithms}{1}{section.4}}
-\@writefile{toc}{\contentsline {section}{\numberline {V}Zielinski et al. - Multiple Cos Fitting}{2}{section.5}}
-\newlabel{eq:mFourFit}{{1}{2}{Zielinski et al. - Multiple Cos Fitting}{equation.5.1}{}}
-\newlabel{eq:FFT-NLLS}{{2}{2}{Zielinski et al. - Multiple Cos Fitting}{equation.5.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces A plot of artificially generated data that has then been fit to using the mFourFit equation.\relax }}{2}{figure.caption.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Look at this mess. Look upon it, and weep.\relax }}{1}{figure.caption.1}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:mFourFit_ex}{{1}{2}{A plot of artificially generated data that has then been fit to using the mFourFit equation.\relax }{figure.caption.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces A plot of our real data, and the fit we found using a genetic algorithm with FFT-NLLS. The fit does not get the individual oscillations, but it does find the general trend of the data.\relax }}{2}{figure.caption.2}}
-\newlabel{fig:FFT-NLLS_real}{{2}{2}{A plot of our real data, and the fit we found using a genetic algorithm with FFT-NLLS. The fit does not get the individual oscillations, but it does find the general trend of the data.\relax }{figure.caption.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Correcting the Data with Polynomial Fit}{2}{section.6}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Using the third-degree polynomial fit to find the downwards trend of our data, and correcting the data based on that downwards trend.\relax }}{3}{figure.caption.3}}
-\newlabel{fig:correcting_with_poly}{{3}{3}{Using the third-degree polynomial fit to find the downwards trend of our data, and correcting the data based on that downwards trend.\relax }{figure.caption.3}{}}
+\newlabel{fig:unsmoothed_data}{{1}{1}{Look at this mess. Look upon it, and weep.\relax }{figure.caption.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {III}Windowing}{1}{section.3}}
+\citation{Zielinski}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Hamming and Flattop Window Test: Using MATLAB code, this shows us one of the sets of data, and shows the effect of using the Hamming and Flattop window functions to dampen it. The bottom result is supposed to show us the periods detected after the application of the algorithm, however, it is not detecting the periods properly, likely due to the cancerous data. This is further confirmed by the period being detected, which is much larger than it should be, as the periods should be 20-30h at best. The explicit use versus the ones matrix indicates if there was an additional matrix used in mitigating the effects of the algorithm on the signal. Explicit use meant no additional matrix was used, ones matrix indicates that ones matrix was used.\relax }}{2}{figure.caption.2}}
+\newlabel{fig:grid}{{2}{2}{Hamming and Flattop Window Test: Using MATLAB code, this shows us one of the sets of data, and shows the effect of using the Hamming and Flattop window functions to dampen it. The bottom result is supposed to show us the periods detected after the application of the algorithm, however, it is not detecting the periods properly, likely due to the cancerous data. This is further confirmed by the period being detected, which is much larger than it should be, as the periods should be 20-30h at best. The explicit use versus the ones matrix indicates if there was an additional matrix used in mitigating the effects of the algorithm on the signal. Explicit use meant no additional matrix was used, ones matrix indicates that ones matrix was used.\relax }{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Genetic Algorithms}{2}{section.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Zielinski et al. - Multiple Cos Fitting}{2}{section.5}}
+\newlabel{eq:mFourFit}{{1}{3}{Zielinski et al. - Multiple Cos Fitting}{equation.5.1}{}}
+\newlabel{eq:FFT-NLLS}{{2}{3}{Zielinski et al. - Multiple Cos Fitting}{equation.5.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces A plot of artificially generated data that has then been fit to using the mFourFit equation.\relax }}{3}{figure.caption.3}}
+\newlabel{fig:mFourFit_ex}{{3}{3}{A plot of artificially generated data that has then been fit to using the mFourFit equation.\relax }{figure.caption.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces A plot of our real data, and the fit we found using a genetic algorithm with FFT-NLLS. The fit does not get the individual oscillations, but it does find the general trend of the data.\relax }}{3}{figure.caption.4}}
+\newlabel{fig:FFT-NLLS_real}{{4}{3}{A plot of our real data, and the fit we found using a genetic algorithm with FFT-NLLS. The fit does not get the individual oscillations, but it does find the general trend of the data.\relax }{figure.caption.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Correcting the Data with Polynomial Fit}{3}{section.6}}
 \@writefile{toc}{\contentsline {section}{\numberline {VII}Peak Finding with Derivatives}{3}{section.7}}
-\@writefile{toc}{\contentsline {section}{\numberline {VIII}Our Peak Detection Process}{3}{section.8}}
-\@writefile{toc}{\contentsline {section}{\numberline {IX}Using Peaks to Find the Period as a Function of Time}{3}{section.9}}
-\@writefile{toc}{\contentsline {section}{\numberline {X}Conclusion}{3}{section.10}}
-\@writefile{toc}{\contentsline {section}{\numberline {XI}Acknowledgments}{3}{section.11}}
-\@writefile{toc}{\contentsline {section}{\numberline {XII}References}{3}{section.12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Using the third-degree polynomial fit to find the downwards trend of our data, and correcting the data based on that downwards trend.\relax }}{4}{figure.caption.5}}
+\newlabel{fig:correcting_with_poly}{{5}{4}{Using the third-degree polynomial fit to find the downwards trend of our data, and correcting the data based on that downwards trend.\relax }{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Using the first derivative to find peaks.\relax }}{4}{figure.caption.6}}
+\newlabel{fig:first_drv_fail}{{6}{4}{Using the first derivative to find peaks.\relax }{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Our Peak Detection Process}{4}{section.8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Using the third derivative to find peaks.\relax }}{4}{figure.caption.7}}
+\newlabel{fig:third_drv_fail}{{7}{4}{Using the third derivative to find peaks.\relax }{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IX}Using Peaks to Find the Period as a Function of Time}{4}{section.9}}
+\bibcite{Zielinski}{1}
+\bibcite{SciPy}{2}
+\bibcite{Matplotlib}{3}
+\bibcite{MatLab}{4}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Our final peak and valley detection process. This process worked consistently for every dataset that we tried it on.\relax }}{5}{figure.caption.8}}
+\newlabel{fig:pv_det_final}{{8}{5}{Our final peak and valley detection process. This process worked consistently for every dataset that we tried it on.\relax }{figure.caption.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces A plot of the found period over time of one of our datasets. We also plotted the third-degree polynomial fit of the found period data in order to get a continuous function of the period over time.\relax }}{5}{figure.caption.9}}
+\newlabel{fig:per_over_time}{{9}{5}{A plot of the found period over time of one of our datasets. We also plotted the third-degree polynomial fit of the found period data in order to get a continuous function of the period over time.\relax }{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {X}Conclusion}{5}{section.10}}
+\@writefile{toc}{\contentsline {section}{References}{5}{section*.11}}
