@@ -116,33 +116,32 @@ pred_x = np.array(pred_x).astype(int)
 # print(true_t.shape)
 # print(fixed_x.shape)
 
-<<<<<<< HEAD
 # generate plot that shows the inverted fit fixing the data
 plt.plot( fit_x, true_t )
 plt.plot( inv_fit_x, true_t )
 plt.plot( fixed_x, true_t )
 plt.plot( true_x, true_t )
-=======
+
 # plot the way that the inverted fit "fixes" the data
 plt.plot(true_t, fit_x, label="Polynomial fit (of degree 3)", linewidth=2 )
-plt.plot(true_t, inv_fit_x, label="Inverted polynomial fit", linewidth=2 )
+# plt.plot(true_t, inv_fit_x, label="Inverted polynomial fit", linewidth=2 )
 plt.plot(true_t, true_x, label="Original data", linewidth=2 )
-plt.plot(true_t, fixed_x, label="Corrected data", linewidth=2 )
+# plt.plot(true_t, fixed_x, label="Corrected data", linewidth=2 )
 plt.legend(loc="best")
-plt.title("Correcting downwards slope with an inverted polynomial fit") 
+plt.title("Fitting the Downward Trend")
 plt.xlabel("Time (days)")
 plt.ylabel("Counts per second")
->>>>>>> master
+
 plt.show()
 plt.clf()
 
 # print(pv_idx[0])
-plt.plot( true_t[pv_idx[0][:-1]], per_t, 'rx', mew=2, markersize=8, label="measured period (from found peaks and valleys)")
-plt.plot( true_t[:-100], fit_x[:-100], 'b--', linewidth=2, label="polynomial fit (power "+str(pow)+")")
-plt.legend(loc="best")
-plt.title("Oscillation Period over Time")
-plt.xlabel("Time (days)")
-plt.ylabel("Period (hours)")
+# plt.plot( true_t[pv_idx[0][:-1]], per_t, 'rx', mew=2, markersize=8, label="measured period (from found peaks and valleys)")
+# plt.plot( true_t[:-100], fit_x[:-100], 'b--', linewidth=2, label="polynomial fit (power "+str(pow)+")")
+# plt.legend(loc="best")
+# plt.title("Oscillation Period over Time")
+# plt.xlabel("Time (days)")
+# plt.ylabel("Period (hours)")
 # plt.show()
 plt.clf()
 # plt.plot( true_t, true_x )
