@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.8)  8 MAY 2018 23:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.8)  11 MAY 2018 11:23
 entering extended mode
 **./paper.tex
 (paper.tex
@@ -437,33 +437,29 @@ Package pdftex.def Info: Requested size: 252.0pt x 188.99811pt on input line 46
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
-
-
-LaTeX Warning: Reference `fig:poly_fit' on page 3 undefined on input line 475.
-
-<"plots/corrected_poly".png, id=77, 1445.4pt x 578.16pt>
+<"plots/corrected_poly".png, id=78, 1445.4pt x 578.16pt>
 File: "plots/corrected_poly".png Graphic file (type png)
 <use "plots/corrected_poly".png>
 Package pdftex.def Info: "plots/corrected_poly".png  used on input line 479. on
  input line 479.
 Package pdftex.def Info: Requested size: 252.0pt x 100.80016pt on input line 47
 9.
-[3 <./plots/FourFit_GA_match.png> <./plots/NLLS_GA_realdata.png>]
-<"plots/first_drv_fail".png, id=95, 462.528pt x 346.896pt>
+ [3 <./plots/FourFit_GA_match.png> <./plots/NLLS_GA_realdata.png>]
+<"plots/first_drv_fail".png, id=96, 462.528pt x 346.896pt>
 File: "plots/first_drv_fail".png Graphic file (type png)
 <use "plots/first_drv_fail".png>
 Package pdftex.def Info: "plots/first_drv_fail".png  used on input line 490. on
  input line 490.
 Package pdftex.def Info: Requested size: 252.0pt x 189.00427pt on input line 49
 0.
-<"plots/third_drv_fail".png, id=96, 462.528pt x 346.896pt>
+<"plots/third_drv_fail".png, id=97, 462.528pt x 346.896pt>
 File: "plots/third_drv_fail".png Graphic file (type png)
 <use "plots/third_drv_fail".png>
 Package pdftex.def Info: "plots/third_drv_fail".png  used on input line 497. on
  input line 497.
 Package pdftex.def Info: Requested size: 252.0pt x 189.00427pt on input line 49
 7.
-<"plots/pv_det_final".png, id=98, 617.30624pt x 471.7625pt>
+<"plots/pv_det_final".png, id=99, 617.30624pt x 471.7625pt>
 File: "plots/pv_det_final".png Graphic file (type png)
 <use "plots/pv_det_final".png>
 Package pdftex.def Info: "plots/pv_det_final".png  used on input line 508. on i
@@ -501,18 +497,14 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 572.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 572.
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: 55C17ABD02513080AE9860BB90A14FC2;667.
-
-
-LaTeX Warning: There were undefined references.
-
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 572.
  ) 
 Here is how much of TeX's memory you used:
- 8255 strings out of 493312
- 131046 string characters out of 3138899
+ 8253 strings out of 493312
+ 131026 string characters out of 3138899
  224104 words of memory out of 3000000
- 11723 multiletter control sequences out of 15000+200000
- 34114 words of font info for 63 fonts, out of 3000000 for 9000
+ 11722 multiletter control sequences out of 15000+200000
+ 33007 words of font info for 62 fonts, out of 3000000 for 9000
  1144 hyphenation exceptions out of 8191
  36i,7n,39p,1665b,311s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Program Files/Mi
@@ -525,9 +517,9 @@ ts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy
 m Files/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Files/MiKTeX 2
 .9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/ur
 w/times/utmri8a.pfb>
-Output written on paper.pdf (5 pages, 1168253 bytes).
+Output written on paper.pdf (5 pages, 1168009 bytes).
 PDF statistics:
- 165 PDF objects out of 1000 (max. 8388607)
+ 166 PDF objects out of 1000 (max. 8388607)
  33 named destinations out of 1000 (max. 500000)
  129 words of extra memory for PDF output out of 10000 (max. 10000000)
 

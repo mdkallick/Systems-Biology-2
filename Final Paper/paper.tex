@@ -472,7 +472,7 @@ For this project, we used a genetic algorithm to fit parameters for both FourFit
 
 \section{Correcting the Data with Polynomial Fit}
 When we first realized that we could use the genetic algorithm to correct the data, we were very excited to have solved one of our major issues with the data. However, we soon noticed a major issue - running a fitting algorithm for 10 hours on a single dataset is not the most efficient way to clean data. At that point it is cheaper and easier to have a human do it. Our solution to this problem was to look for a simpler fitting algorithm. After testing a few, we settled on simply using a third-degree polynomial fit to find the trend of the data. This is a much lower level fitting algorithm, and it does not fit complex data nearly as well as the FourFit or FFT-NLLS functions, but our data’s downwards trend is pretty simply, so it works very well for that, and, importantly, it fits quickly enough that it is not a noticeable slowdown in our code.
-As can be seen in Figure \ref{fig:poly_fit}, the third-degree polynomial fit finds the trend in our data perfectly. If we then invert the fit, and add it to the raw data, we get a corrected dataset (Figure \ref{fig:correcting_with_poly}) that is much, much easier to analyze. This result allowed us to improve our peak finding substantially.
+As can be seen in Figure \ref{fig:correcting_with_poly}, the third-degree polynomial fit finds the trend in our data perfectly. If we then invert the fit, and add it to the raw data, we get a corrected dataset (Figure \ref{fig:correcting_with_poly}) that is much, much easier to analyze. This result allowed us to improve our peak finding substantially.
 
 \begin{figure}[!ht]
 	\centering

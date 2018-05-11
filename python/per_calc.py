@@ -14,7 +14,7 @@ from utils import calc_FourFit
 def find_pv_single(true_data, col, save_plot=True, show_plot=False):
 	true_t = true_data[:,col]
 	true_x = true_data[:,col+1]
-	
+
 	# remove the first day of data
 	cutoff = np.argmin(np.absolute(np.subtract(true_t, 1.0)))
 # 		print(true_t.shape)
@@ -32,7 +32,7 @@ def find_pv_single(true_data, col, save_plot=True, show_plot=False):
 # 		plt.clf()
 # 		plt.plot( true_t, true_x , 'r' )
 # 		plt.show()
-# 		
+#
 # 		true_x = true_x[~np.isnan(true_x)]
 # 		true_t = true_t[~np.isnan(true_x)]
 
@@ -83,7 +83,7 @@ def find_pv_single(true_data, col, save_plot=True, show_plot=False):
 	cutoff=0
 
 	figsize=(20, 8)
-	
+
 	plt.clf()
 	plt.close()
 	plt.figure(figsize=figsize)
@@ -101,7 +101,7 @@ def find_pv_single(true_data, col, save_plot=True, show_plot=False):
 
 	plt.close()
 	plt.figure(figsize=figsize)
-	
+
 	plt.plot( true_t[cutoff:], fixed_x[cutoff:] , 'b', label="corrected data" )
 	plt.plot( true_t[cutoff:-1], np.add(np.multiply(dx,50),avg_y)[cutoff:], 'g--', label="first derivative" )
 	# plt.plot( true_t[pv_idx], true_x[pv_idx], 'bx' )
@@ -130,11 +130,10 @@ def find_pv_full(filename="021717_12h_starvation_Ca1a_Bmal1.csv", save_plot=True
 # 	print(true_data.shape[1]/2)
 
 	max = (0,0)
-	
+
 	for i in range((int)(true_data.shape[1]/2)):
 		fit_x, inv_fit_x, fixed_x, pv_idx, new_idx = find_pv_single(true_data, 2*i, save_plot, show_plot)
 
 		if(pv_idx[0].shape[0] > max[0]):
 			max = (pv_idx[0].shape[0], (2*i,(2*i)+1))
 	return max
-	
